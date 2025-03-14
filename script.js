@@ -10,21 +10,43 @@ const statemesh = await json(
 ).then((us) => feature(us, us.objects.states));
 
 const libraries = await csv("data/sample.csv");
+const dots = [];
 
-const plot = Plot.plot({
-  projection: "albers-usa",
-  marks: [
-    Plot.geo(nation, { fill: "lightgray" }),
-    Plot.geo(statemesh, { strokeOpacity: 0.2 }),
-    Plot.dot(libraries, {
-      x: "longitude",
-      y: "latitude",
-      fill: "red",
-      title: (d) => d.name,
-      tip: true,
-    }),
-  ],
-});
+let marks = [
+  Plot.geo(nation, { fill: "lightgray" }),
+  Plot.geo(statemesh, { strokeOpacity: 0.2 }),
+  Plot.dot(dots, {
+    x: "longitude",
+    y: "latitude",
+    fill: "red",
+    tip: true,
+    title: (d) => d.name,
+  }),
+];
 
-const div = document.querySelector("#myplot");
-div.append(plot);
+function renderPlot() {
+  const plot = Plot.plot({
+    projection: "albers-usa",
+    marks: marks,
+  });
+  const div = document.querySelector("#myplot");
+  div.innerHTML = "";
+  div.append(plot);
+}
+
+renderPlot();
+
+function addDotsToMap() {
+  let index = 0;
+  const interval = setInterval(() => {
+    if (index < libraries.length) {
+      dots.push(libraries[index]);
+      renderPlot();
+      index++;
+    } else {
+      clearInterval(interval);
+    }
+  }, 500);
+}
+
+addDotsToMap();
