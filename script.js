@@ -9,7 +9,7 @@ const statemesh = await json(
   "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 ).then((us) => feature(us, us.objects.states));
 
-const libraries = await csv("data/sample.csv");
+const libraries = await csv("data/withCoordinates.csv");
 const dots = [];
 
 let marks = [
@@ -43,10 +43,11 @@ function addDotsToMap() {
       dots.push(libraries[index]);
       renderPlot();
       index++;
+      console.log(index);
     } else {
       clearInterval(interval);
     }
-  }, 500);
+  }, 1);
 }
 
 addDotsToMap();
