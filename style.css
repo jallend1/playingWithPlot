@@ -12,7 +12,7 @@ body {
 
 #container {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   align-items: center;
   justify-content: center;
   text-align: center;
@@ -23,4 +23,34 @@ h1 {
   font-size: 2em;
   margin-bottom: 20px;
   color: #2995dd;
+  text-align: center;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  max-height: 300px;
+  overflow: scroll;
+}
+
+li {
+  padding: 10px;
+  margin: 10px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Initiate item slightly up from its final position and invisible*/
+li.new-item {
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+li.new-item.show {
+  transform: translateY(0);
+  opacity: 1;
 }

@@ -42,12 +42,29 @@ function addDotsToMap() {
     if (index < libraries.length) {
       dots.push(libraries[index]);
       renderPlot();
+      addLibraryToList(libraries[index]);
       index++;
       // console.log(index);
     } else {
       clearInterval(interval);
     }
-  }, 1);
+  }, 500);
 }
 
 addDotsToMap();
+
+function addLibraryToList(library) {
+  const ul = document.querySelector("#libraries");
+  const li = document.createElement("li");
+  li.textContent = library.name;
+  li.classList.add("new-item");
+
+  ul.insertBefore(li, ul.firstChild);
+  li.offsetHeight;
+  li.classList.add("show");
+
+  // Remove the animation class after completion
+  setTimeout(() => {
+    li.classList.remove("new-item", "show");
+  }, 300);
+}
