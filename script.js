@@ -18,7 +18,7 @@ let marks = [
   Plot.dot(dots, {
     x: "longitude",
     y: "latitude",
-    fill: "red",
+    fill: (d, i) => (i % 2 === 0 ? "red" : "blue"),
     tip: true,
     title: (d) => d.name,
   }),
@@ -43,7 +43,7 @@ function addDotsToMap() {
       dots.push(libraries[index]);
       renderPlot();
       index++;
-      console.log(index);
+      // console.log(index);
     } else {
       clearInterval(interval);
     }
