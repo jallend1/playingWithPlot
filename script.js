@@ -9,6 +9,10 @@ const statemesh = await json(
   "https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json"
 ).then((us) => feature(us, us.objects.states));
 
+let pauseAnimation = false;
+
+const showAllButton = document.querySelector("#show-all");
+
 const libraries = await csv("data/withCoordinates.csv");
 const dots = [];
 
@@ -39,12 +43,11 @@ renderPlot();
 function addDotsToMap() {
   let index = 0;
   const interval = setInterval(() => {
-    if (index < libraries.length) {
+    if (index < libraries.length && !pauseAnimation) {
       dots.push(libraries[index]);
       renderPlot();
       addLibraryToList(libraries[index]);
       index++;
-      // console.log(index);
     } else {
       clearInterval(interval);
     }
@@ -67,4 +70,15 @@ function addLibraryToList(library) {
   setTimeout(() => {
     li.classList.remove("new-item", "show");
   }, 300);
+}
+
+showAllButton.addEventListener("click", () => {
+  showAllLibraries();
+});
+
+function showAllLibraries() {
+  pauseAnimation = true;
+  dots.splice(0, dots.length);
+  dots.push(...libraries);
+  renderPlot();
 }

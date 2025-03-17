@@ -10,6 +10,11 @@ body {
   height: 100vh;
 }
 
+main {
+  margin: auto;
+  text-align: center;
+}
+
 #container {
   display: flex;
   /* flex-direction: column; */
@@ -44,7 +49,7 @@ li {
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Initiate item slightly up from its final position and invisible*/
+/* Initiate item slightly up from its final position and invisible */
 li.new-item {
   transform: translateY(-20px);
   opacity: 0;
@@ -53,4 +58,28 @@ li.new-item {
 li.new-item.show {
   transform: translateY(0);
   opacity: 1;
+}
+
+button {
+  background-color: #2995dd;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  margin-top: 20px;
+}
+
+button:hover {
+  background-color: #1e7bbf;
+}
+
+button:active {
+  transform: scale(0.9);
+}
+
+button:focus {
+  box-shadow: 0 0 0 3px rgba(16, 57, 83, 0.836);
 }
